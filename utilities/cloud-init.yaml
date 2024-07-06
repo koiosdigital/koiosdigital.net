@@ -1,0 +1,7 @@
+#cloud-config
+package_upgrade: true
+runcmd:
+- export USER=$(awk -v uid=1000 -F":" '{ if($3==uid){print $1} }' /etc/passwd)
+- curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash -s -- -y --no-modify-path --default-toolchain stable --profile default
+- echo '\n\n# added by cloud init\nsource /opt/rust/env' >> /home/$USER/.profile
+- sudo -H -u $USER bash -c 'cd ~ && ./actions-runner/config.sh --url https://github.com/koiosdigital --token AIG5S3PJKM6QRLQULGXHNODGRGUQU && ./actions-runner/run.sh &'

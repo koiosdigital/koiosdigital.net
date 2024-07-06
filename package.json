@@ -1,0 +1,42 @@
+{
+  "name": "koiosdigital.net",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "dependencies": {
+    "@formkit/icons": "^1.6.5",
+    "@formkit/nuxt": "^1.6.5",
+    "@heroicons/vue": "^2.1.4",
+    "@nuxt/fonts": "^0.7.1",
+    "@nuxt/image": "^1.7.0",
+    "@nuxtjs/sitemap": "^5.3.2",
+    "@octokit/core": "^6.1.2",
+    "@octokit/webhooks": "^13.2.7",
+    "date-fns": "^3.6.0",
+    "nuxt": "^3.12.3",
+    "nuxt-og-image": "v3.0.0-beta.59",
+    "oci-sdk": "^2.89.1",
+    "vue": "^3.4.31",
+    "vue-easy-lightbox": "next",
+    "vue-matomo": "^4.2.0",
+    "vue-router": "^4.4.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^0.3.13",
+    "@nuxtjs/tailwindcss": "^6.12.0",
+    "@types/date-fns": "^2.6.0",
+    "@types/eslint": "^8.56.10",
+    "eslint": "^8.57.0",
+    "sass": "^1.77.6",
+    "typescript": "^5.5.3"
+  },
+  "packageManager": "yarn@3.2.4"
+}
