@@ -1,4 +1,5 @@
 import { Webhooks } from "@octokit/webhooks";
+import { createSpotVM, terminateSpotVM } from "~/utilities/oracle";
 
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig();
@@ -9,7 +10,19 @@ export default defineEventHandler(async (event) => {
 
     webhooks.on('workflow_job', async ({ id, name, payload }) => {
         console.log('workflow_job', id, name, payload);
+        const workflow_id = payload.workflow_job.id.toString();
+
+        if (payload.action === "queued") {
+            const response = await createSpotVM(runtimeConfig.ociCompartmentId, "GsOY:US-CHICAGO-1-AD-1", workflow_id);
+            console.log(response);
+        } else if (payload.action === "completed") {
+            // delete VM
+            const response = await terminateSpotVM(runtimeConfig.ociCompartmentId, workflow_id);
+            console.log(response);
+        }
     });
+
+
 
     const requestID = getHeader(event, "x-github-delivery");
     const eventName = getHeader(event, "x-github-event");
