@@ -4,7 +4,6 @@ import type { requests } from 'oci-core';
 import { ComputeClient } from 'oci-core';
 import { generateCloudInit } from "./cloud-init";
 import { Octokit } from '@octokit/core';
-import { fi } from "date-fns/locale";
 
 export const createAuthenticationProvider = () => {
     const runtimeConfig = useRuntimeConfig();
@@ -63,24 +62,26 @@ export const createSpotVM = async (compartmentId: string, availabilityDomain: st
             compartmentId: compartmentId,
             availabilityDomain: availabilityDomain,
             displayName: name,
+            /*
             preemptibleInstanceConfig: {
                 preemptionAction: {
                     preserveBootVolume: false,
                     type: 'TERMINATE'
                 }
             },
+            */
             metadata: {
                 user_data: cloudInit,
                 ssh_authorized_keys: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIU3oGsvlU4gDHM3TU+xvftu9GwE5N/NrqLoBM38vio"
             },
-            shape: 'VM.Standard.E4.Flex',
+            shape: 'VM.Standard.E5.Flex',
             createVnicDetails: {
                 assignPublicIp: true,
                 subnetId: 'ocid1.subnet.oc1.us-chicago-1.aaaaaaaa3ohdot7cqzdepcw5gmokyzm2sng7rdmltsvgvac2io5asuhwo2mq'
             },
             shapeConfig: {
-                ocpus: 16,
-                memoryInGBs: 32
+                ocpus: 32,
+                memoryInGBs: 24
             },
             sourceDetails: {
                 bootVolumeSizeInGBs: 100,
