@@ -63,14 +63,12 @@ export const createSpotVM = async (compartmentId: string, availabilityDomain: st
             compartmentId: compartmentId,
             availabilityDomain: availabilityDomain,
             displayName: name,
-            /*
             preemptibleInstanceConfig: {
                 preemptionAction: {
                     preserveBootVolume: false,
                     type: 'TERMINATE'
                 }
             },
-            */
             metadata: {
                 user_data: cloudInit,
                 ssh_authorized_keys: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIU3oGsvlU4gDHM3TU+xvftu9GwE5N/NrqLoBM38vio"
@@ -81,8 +79,8 @@ export const createSpotVM = async (compartmentId: string, availabilityDomain: st
                 subnetId: 'ocid1.subnet.oc1.us-chicago-1.aaaaaaaa3ohdot7cqzdepcw5gmokyzm2sng7rdmltsvgvac2io5asuhwo2mq'
             },
             shapeConfig: {
-                ocpus: 2,
-                memoryInGBs: 8
+                ocpus: 16,
+                memoryInGBs: 32
             },
             sourceDetails: {
                 bootVolumeSizeInGBs: 100,
@@ -121,7 +119,8 @@ export const terminateSpotVM = async (compartmentId: string, job_id: string) => 
     const instance = response.items[0];
 
     const terminateRequest = {
-        instanceId: instance.id
+        instanceId: instance.id,
+        preserveBootVolume: false
     }
 
     const terminateResponse = await client.terminateInstance(terminateRequest);
