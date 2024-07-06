@@ -80,7 +80,7 @@ export const createSpotVM = async (compartmentId: string, availabilityDomain: st
                 subnetId: 'ocid1.subnet.oc1.us-chicago-1.aaaaaaaa3ohdot7cqzdepcw5gmokyzm2sng7rdmltsvgvac2io5asuhwo2mq'
             },
             shapeConfig: {
-                ocpus: 32,
+                ocpus: 16,
                 memoryInGBs: 24
             },
             sourceDetails: {
@@ -105,16 +105,18 @@ export const terminateSpotVM = async (compartmentId: string, job_id: string) => 
 
     //first find the instance
     const request = {
-        filter: {
-            displayName: job_id
-        },
+        displayName: `runner-${job_id}`,
         compartmentId: compartmentId
     }
 
     const response = await client.listInstances(request);
 
     if (response.items.length == 0) {
-        return;
+        throw createError({
+            status: 404,
+            message: "Instance not found",
+            fatal: true
+        });
     }
 
     const instance = response.items[0];
