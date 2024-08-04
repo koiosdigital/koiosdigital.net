@@ -7,6 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "preinstall": "npx only-allow pnpm",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -32,11 +33,10 @@
   "devDependencies": {
     "@nuxt/eslint": "^0.3.13",
     "@nuxtjs/tailwindcss": "^6.12.0",
-    "@types/date-fns": "^2.6.0",
     "@types/eslint": "^8.56.10",
     "eslint": "^8.57.0",
     "sass": "^1.77.6",
     "typescript": "^5.5.3"
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "pnpm@9.5.0"
 }

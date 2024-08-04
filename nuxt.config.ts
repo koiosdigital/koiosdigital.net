@@ -57,7 +57,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['cdn.koiosdigital.net'],
+    domains: ['cdn.koiosdigital.net', 'koiosdigital.net'],
   },
 
   formkit: {
