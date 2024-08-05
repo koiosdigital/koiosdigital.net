@@ -9,7 +9,7 @@
                 color: 'gray',
                 to: '/about'
             }]" orientation='vertical' />
-        <div class="h-full w-full">
+        <div class="h-full w-full hidden md:block">
             <Traces :font-controlled="false" />
         </div>
     </div>
