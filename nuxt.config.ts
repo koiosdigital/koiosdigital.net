@@ -35,13 +35,9 @@ export default defineNuxtConfig({
     domains: ['koiosdigital.net'],
   },
 
-  formkit: {
-    autoImport: true,
-  },
-
   sitemap: {
     cacheMaxAgeSeconds: 3600,
-    exclude: ['/**'],
+    exclude: ['/api/**'],
   },
 
   eslint: {
