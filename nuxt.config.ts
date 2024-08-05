@@ -1,41 +1,15 @@
-const ogImageFonts = [
-  {
-    name: 'larken',
-    weight: 500,
-    path: '/fonts/Larken.otf'
-  },
-  {
-    name: 'larken',
-    weight: 700,
-    path: '/fonts/LarkenBold.otf'
-  },
-  {
-    name: 'amandine',
-    weight: 500,
-    path: '/fonts/Amandine.otf'
-  },
-  {
-    name: 'condor',
-    weight: 500,
-    path: '/fonts/Condor.ttf'
-  },
-  {
-    name: 'condor',
-    weight: 700,
-    path: '/fonts/CondorBold.ttf'
-  },
-]
-
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
+  extends: ['@nuxt/ui-pro'],
+
   modules: [
-    '@nuxtjs/tailwindcss',
+    "@nuxt/ui",
+    "@nuxtjs/tailwindcss",
     '@nuxt/image',
-    '@formkit/nuxt',
     '@nuxtjs/sitemap',
     "@nuxt/eslint",
-    "nuxt-og-image"
+    "nuxt-svgo"
   ],
 
   css: ['assets/main.scss'],
@@ -57,15 +31,11 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['cdn.koiosdigital.net', 'koiosdigital.net'],
+    domains: ['koiosdigital.net'],
   },
 
   formkit: {
     autoImport: true,
-  },
-
-  experimental: {
-    componentIslands: true,
   },
 
   sitemap: {
@@ -75,18 +45,6 @@ export default defineNuxtConfig({
 
   eslint: {
     // options here
-  },
-
-  nitro: {
-    vercel: {
-      config: {
-        bypassToken: process.env.NUXT_BYPASS_TOKEN,
-      }
-    }
-  },
-
-  ogImage: {
-    fonts: ogImageFonts
   },
 
   compatibilityDate: '2024-07-06'

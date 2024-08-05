@@ -1,3 +1,7 @@
 <template>
-    <p>response 404 (backend NotFound), service rules for the path non-existent</p>
+    <UContainer>
+        <IndexLandingHeader />
+        <IndexServices />
+        <IndexLandingFooter />
+    </UContainer>
 </template>

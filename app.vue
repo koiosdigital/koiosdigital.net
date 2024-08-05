@@ -6,22 +6,21 @@ useHead({
   link: [
     {
       rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicons/favicon-dark.ico',
-      media: '(prefers-color-scheme: dark)',
-    },
-    {
-      rel: 'icon',
-      type: 'image/x-icon',
-      href: '/favicons/favicon-light.ico',
-      media: '(prefers-color-scheme: light)',
-    },
+      type: 'image/png',
+      href: '/img/icon.png',
+    }
   ],
 })
 </script>
 
 <template>
-  <NuxtLayout>
-    <NuxtPage />
-  </NuxtLayout>
+  <SiteNavbar />
+
+  <UMain>
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </UMain>
+
+  <UFooter />
 </template>

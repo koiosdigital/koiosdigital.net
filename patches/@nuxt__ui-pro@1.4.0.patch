@@ -1,0 +1,43 @@
+diff --git a/modules/pro/index.ts b/modules/pro/index.ts
+index 20d337eba2904830cee701418cfd6e3fa81f6758..fda6b140b9f46aed405a56ec8cf78380c1f603c6 100644
+--- a/modules/pro/index.ts
++++ b/modules/pro/index.ts
+@@ -27,11 +27,11 @@ export default defineNuxtModule({
+     content: false,
+     customScrollbars: true
+   },
+-  setup (options, nuxt) {
++  setup(options, nuxt) {
+     const resolver = createResolver(import.meta.url)
+ 
+     if (options.routerOptions || options.routerOptions === undefined) {
+-      nuxt.hook('pages:routerOptions', ({ files }: { files: Array<any>}) => {
++      nuxt.hook('pages:routerOptions', ({ files }: { files: Array<any> }) => {
+         const customRouterOptions = files.find(file => /\/app\/router\.options\.(ts|js)$/.exec(file.path))
+         if (options.routerOptions === undefined && customRouterOptions) {
+           console.warn(`You seem to have a custom router.options file \`${customRouterOptions.path}\`\nThe scrollBehavior will be overriden with ui-pro own router.options unless you set \`uiPro: { routerOptions: false }\` in your nuxt.config\nSet \`uiPro: { routerOptions: true }\` to disable this warning`)
+@@ -98,24 +98,5 @@ export default defineNuxtModule({
+         (Array.isArray(tailwindConfig.content) ? tailwindConfig.content : tailwindConfig.content.files).push(resolver.resolve('./runtime/components/**/*.{vue,mjs,ts}'))
+       })
+     }
+-
+-    /**
+-     * License
+-     */
+-    const theme = pkg.theme || { env: 'NUXT_UI_PRO_LICENSE', link: 'https://ui.nuxt.com/pro' }
+-    const key = process.env[theme.env] || (nuxt.options as any).uiPro?.license
+-    if (nuxt.options.dev || nuxt.options._prepare || nuxt.options.test) {
+-      if (nuxt.options.dev && !key) {
+-        consola.box(
+-          colors.greenBright('Nuxt UI Pro') + '\n\n' +
+-          `Missing \`${theme.env}\` env variable, please add it to your \`.env\`.` + '\n\n' +
+-          colors.blueBright(`Purchase Nuxt UI Pro at ${theme.link} to build your app in production.`)
+-        )
+-      }
+-      return
+-    }
+-    nuxt.hook('build:before', async () => {
+-      await validateLicense({ key, theme, dir: nuxt.options.rootDir })
+-    })
+   }
+ })
