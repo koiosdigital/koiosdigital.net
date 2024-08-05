@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/sitemap',
     "@nuxt/eslint",
+    "@nuxt/fonts",
     "nuxt-svgo"
   ],
 

@@ -18,7 +18,10 @@ export default <Partial<Config>>{
           900: '#733314',
           950: '#421906',
         }
-      }
+      },
+      fontFamily: {
+        'sans': ['"Titillium Web"'],
+      },
     }
   }
 }
