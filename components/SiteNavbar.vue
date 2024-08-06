@@ -1,8 +1,11 @@
 <template>
     <UHeader>
         <template #logo>
-            <NuxtPicture src="/img/logo_dark.png" alt="Logo" class="hidden dark:block max-w-60" />
-            <NuxtPicture src="/img/logo_light.png" alt="Logo" class="block dark:hidden max-w-60" />
+            <div class="md:block hidden">
+                <NuxtPicture src="/img/logo_light.png" alt="Logo" class="block dark:hidden max-w-60" />
+                <NuxtPicture src="/img/logo_dark.png" alt="Logo" class="hidden dark:block max-w-60" />
+            </div>
+            <NuxtPicture src="/img/icon.png" alt="Icon" class="block max-w-60 md:hidden h-8 w-8" />
         </template>
         <template #right>
             <UHeaderLinks :links />
