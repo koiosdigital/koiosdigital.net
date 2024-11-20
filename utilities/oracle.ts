@@ -62,14 +62,12 @@ export const createSpotVM = async (compartmentId: string, availabilityDomain: st
             compartmentId: compartmentId,
             availabilityDomain: availabilityDomain,
             displayName: name,
-            /*
             preemptibleInstanceConfig: {
                 preemptionAction: {
                     preserveBootVolume: false,
                     type: 'TERMINATE'
                 }
             },
-            */
             metadata: {
                 user_data: cloudInit,
                 ssh_authorized_keys: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEIU3oGsvlU4gDHM3TU+xvftu9GwE5N/NrqLoBM38vio"
