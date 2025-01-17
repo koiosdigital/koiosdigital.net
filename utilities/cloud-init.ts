@@ -7,7 +7,7 @@ RUNNER_ORG=${org}
 RUNNER_TOKEN=${token}
 RUNNER_LABELS=self-hosted,x64,docker
 # update this to the latest version
-RUNNER_VERSION=2.317.0
+RUNNER_VERSION=2.321.0
 
 apt update -y
 apt install -y gawk wget git diffstat unzip texinfo gcc build-essential chrpath socat cpio \
