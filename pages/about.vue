@@ -1,7 +1,8 @@
 <template>
     <UContainer>
+
         <UPageBody class="wysiwig space-y-6 max-w-3xl mx-auto">
-            <h1>About Us</h1>
+            <UPageHeader title="About Us" />
             <p>
                 At Koios Digital, we are pioneers in engineering and manufacturing, driven by a passion for innovation
                 and a
