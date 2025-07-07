@@ -20,11 +20,17 @@ export const createAuthenticationProvider = () => {
         region
     );
 
+    console.log('Authentication provider created for region:', region);
+
     return provider
 }
 
 export const createGithubClient = () => {
     const runtimeConfig = useRuntimeConfig();
+
+    if (!runtimeConfig.githubPat) {
+        throw new Error('GitHub Personal Access Token (PAT) is not configured in runtime config.');
+    }
 
     return new Octokit({ auth: runtimeConfig.githubPat });
 }
@@ -36,26 +42,27 @@ export const listInstances = async (provider: SimpleAuthenticationDetailsProvide
     return response.items;
 }
 
-export const createSpotVM = async (compartmentId: string, availabilityDomain: string, job_id: string) => {
+export const createSpotVM = async (org: string, repo: string, compartmentId: string, availabilityDomain: string, job_id: string, label: string) => {
     const provider = createAuthenticationProvider();
 
     const client = new ComputeClient({ authenticationDetailsProvider: provider });
     const githubClient = createGithubClient();
 
-    const github_repo_url = 'koiosdigital'
-
-    const regToken = await githubClient.request('POST /orgs/{org}/actions/runners/registration-token', {
-        org: github_repo_url,
+    const regToken = await githubClient.request('POST /repos/{org}/{repo}/actions/runners/registration-token', {
+        org: org,
+        repo: repo,
         headers: {
             'X-GitHub-Api-Version': '2022-11-28'
         }
     })
 
+    console.log('Registration token received:', regToken.data.token);
+
     const name = `runner-${job_id}`
 
     const github_pat = regToken.data.token
 
-    const cloudInit = generateCloudInit(github_repo_url, github_pat);
+    const cloudInit = generateCloudInit(`${org}/${repo}`, github_pat, label);
 
     const request: requests.LaunchInstanceRequest = {
         launchInstanceDetails: {
@@ -79,10 +86,10 @@ export const createSpotVM = async (compartmentId: string, availabilityDomain: st
             },
             shapeConfig: {
                 ocpus: 16,
-                memoryInGBs: 24
+                memoryInGBs: 64
             },
             sourceDetails: {
-                bootVolumeSizeInGBs: 100,
+                bootVolumeSizeInGBs: 200,
                 bootVolumeVpusPerGB: 120,
                 imageId: "ocid1.image.oc1.us-chicago-1.aaaaaaaahhnymd4iyeq6cpyyzrowzzwbmztipsbul2ctk2foqjpvqa5rx5dq",
                 sourceType: "image"

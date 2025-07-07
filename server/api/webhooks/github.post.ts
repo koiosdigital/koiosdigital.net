@@ -1,6 +1,26 @@
 import { Webhooks } from "@octokit/webhooks";
 import { createSpotVM, terminateSpotVM } from "~/utilities/oracle";
 
+const availabilityDomains = [
+    "GsOY:US-CHICAGO-1-AD-1",
+    "GsOY:US-CHICAGO-1-AD-2",
+    "GsOY:US-CHICAGO-1-AD-3",
+];
+
+const labelConfigs: {
+    [key: string]: {
+        cpu: number;
+        memory: number; // in GB
+        disk: number; // in GB
+    }
+} = {
+    'kd-xxl': {
+        cpu: 16,
+        memory: 64,
+        disk: 100,
+    }
+}
+
 export default defineEventHandler(async (event) => {
     const runtimeConfig = useRuntimeConfig();
 
@@ -11,14 +31,34 @@ export default defineEventHandler(async (event) => {
     webhooks.on('workflow_job', async ({ id, name, payload }) => {
         console.log('workflow_job', id, name, payload);
         const workflow_id = payload.workflow_job.id.toString();
+        const workflow_label = payload.workflow_job.labels.find((label: string) => label !== "self-hosted");
+
+        if (!workflow_label || !labelConfigs[workflow_label]) {
+            console.error(`No configuration found for label: ${workflow_label}`);
+            return;
+        }
+
+        const repo = payload.repository.name;
+        const org = payload.organization!.login;
 
         if (payload.action === "queued") {
-            const response = await createSpotVM(runtimeConfig.ociCompartmentId, "GsOY:US-CHICAGO-1-AD-1", workflow_id);
-            console.log(response);
+            let response;
+            for (const ad of availabilityDomains) {
+                try {
+                    response = await createSpotVM(org, repo, runtimeConfig.ociCompartmentId, ad, workflow_id, workflow_label);
+                    console.log(`VM ${response.instance.displayName} created in ${ad}`);
+                    break; // Exit loop on success
+                } catch (error) {
+                    console.error(`Failed to create VM in ${ad}`);
+                    console.error(error);
+                }
+            }
+            if (!response) {
+                console.error("Failed to create VM in all availability domains.");
+            }
         } else if (payload.action === "completed") {
-            // delete VM
             const response = await terminateSpotVM(runtimeConfig.ociCompartmentId, workflow_id);
-            console.log(response);
+            console.log(`VM ${response} terminated`);
         }
     });
 
