@@ -19,14 +19,10 @@
     "@nuxt/ui": "^2.18.3",
     "@nuxt/ui-pro": "^1.4.0",
     "@nuxtjs/sitemap": "6.0.0-beta.1",
-    "@octokit/core": "^6.1.2",
-    "@octokit/webhooks": "^13.2.7",
     "nuxt": "^3.12.3",
     "nuxt-svgo": "^4.0.2",
-    "oci-sdk": "^2.89.1",
     "tailwindcss": "^3.4.7",
     "vue": "^3.4.31",
-    "vue-matomo": "^4.2.0",
     "vue-router": "^4.4.0"
   },
   "devDependencies": {

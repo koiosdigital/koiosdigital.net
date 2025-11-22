@@ -15,20 +15,18 @@ export default defineNuxtConfig({
 
   css: ['assets/main.scss'],
 
-  runtimeConfig: {
-    matomoUrl: '',
-    public: {
-      matomoSiteId: '',
+  app: {
+    head: {
+      script: [
+        {
+          src: '/api/gather/script.js',
+          async: true,
+          defer: true,
+          'data-site-id': '7c7c83d15fc5',
+          'data-proxy': '/api/gather'
+        },
+      ],
     },
-    formkitKey: '',
-    githubWebhookSecret: '',
-    githubPat: '',
-    ociTenancyId: '',
-    ociUserId: '',
-    ociCompartmentId: '',
-    ociKeyFingerprint: '',
-    ociPrivateKey: '',
-    ociRegion: '',
   },
 
   image: {
@@ -38,6 +36,13 @@ export default defineNuxtConfig({
   sitemap: {
     cacheMaxAgeSeconds: 3600,
     exclude: ['/api/**'],
+  },
+
+  routeRules: {
+    "/api/gather/*.js": {
+      cors: true,
+      isr: 86400
+    },
   },
 
   eslint: {
