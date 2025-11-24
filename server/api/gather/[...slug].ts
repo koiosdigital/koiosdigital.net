@@ -20,6 +20,12 @@ export default defineEventHandler(async (event) => {
     const headers = new Headers();
     const requestHeaders = getHeaders(event);
 
+    // add X-Real-IP header
+    const clientIP =
+        event.node.req.headers['x-forwarded-for'] || event.node.req.socket.remoteAddress || ''
+    headers.set('x-real-ip', Array.isArray(clientIP) ? clientIP[0] : clientIP)
+    headers.set('x-real-ip', '1.1.1.1')
+
     // Forward important headers but exclude host-specific ones
     const headersToForward = [
         'content-type',
@@ -38,6 +44,8 @@ export default defineEventHandler(async (event) => {
 
     // Don't request encoded responses to avoid encoding issues in production
     headers.set('Accept-Encoding', 'identity');
+
+    console.log(headers)
 
     try {
         // Make the proxied request
@@ -60,6 +68,8 @@ export default defineEventHandler(async (event) => {
         Object.entries(responseHeaders).forEach(([key, value]) => {
             setHeader(event, key, value);
         });
+
+        setHeader(event, 'got-ip', headers.get('x-real-ip') || '')
 
         // Get response body
         const contentType = response.headers.get('content-type') || '';
