@@ -23,8 +23,7 @@ export default defineEventHandler(async (event) => {
     // add X-Real-IP header
     const clientIP =
         event.node.req.headers['x-forwarded-for'] || event.node.req.socket.remoteAddress || ''
-    headers.set('x-real-ip', Array.isArray(clientIP) ? clientIP[0] : clientIP)
-    headers.set('x-real-ip', '1.1.1.1')
+    headers.set('x-rybbit-ip', Array.isArray(clientIP) ? clientIP[0] : clientIP)
 
     // Forward important headers but exclude host-specific ones
     const headersToForward = [
@@ -69,7 +68,7 @@ export default defineEventHandler(async (event) => {
             setHeader(event, key, value);
         });
 
-        setHeader(event, 'got-ip', headers.get('x-real-ip') || '')
+        setHeader(event, 'x-rybbit-ip', headers.get('x-rybbit-ip') || '')
 
         // Get response body
         const contentType = response.headers.get('content-type') || '';
