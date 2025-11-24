@@ -26,7 +26,6 @@ export default defineEventHandler(async (event) => {
         'authorization',
         'user-agent',
         'accept',
-        'accept-encoding',
         'accept-language',
         'cache-control',
     ];
@@ -36,6 +35,9 @@ export default defineEventHandler(async (event) => {
             headers.set(header, requestHeaders[header]);
         }
     });
+
+    // Don't request encoded responses to avoid encoding issues in production
+    headers.set('Accept-Encoding', 'identity');
 
     try {
         // Make the proxied request
@@ -63,9 +65,7 @@ export default defineEventHandler(async (event) => {
         const contentType = response.headers.get('content-type') || '';
         let responseBody;
 
-        if (contentType.includes('application/json')) {
-            responseBody = await response.json();
-        } else if (contentType.includes('text/') || contentType.includes('application/javascript') || contentType.includes('application/x-javascript')) {
+        if (contentType.includes('text/') || contentType.includes('application/javascript') || contentType.includes('application/x-javascript') || contentType.includes('application/json')) {
             responseBody = await response.text();
         } else {
             responseBody = await response.arrayBuffer();
