@@ -1,54 +1,52 @@
 <template>
     <UContainer>
-
         <UPageBody class="wysiwig space-y-6 max-w-3xl mx-auto">
             <UPageHeader title="About Us" />
             <p>
-                At Koios Digital, we are pioneers in engineering and manufacturing, driven by a passion for innovation
-                and a
-                commitment to excellence. Founded on the principle of pushing boundaries, we strive to redefine industry
-                standards and create solutions that shape the future. Engineering isn't simply our vocation, it is our
-                way of life.
+                We're a small team of engineers who got tired of watching projects stall because the firmware people
+                couldn't talk to the cloud people, and nobody wanted to own the hardware. So we built a practice
+                that covers the whole stack.
             </p>
             <p>
-                Our team is comprised of seasoned professionals and fresh talent, united by a shared vision of
-                transforming ideas into reality. With expertise spanning mechanical, electrical, and software
-                engineering, we possess the versatility to tackle diverse challenges and deliver cutting-edge solutions.
+                Our engineers have shipped firmware on STM32 and ESP32, laid out PCBs in Altium, built cloud
+                backends, and deployed web apps. Sometimes all on the same project. That's kind of the point.
             </p>
-            <div>
-                <NuxtPicture src="/img/circuit-board-1.jpg" class="pic" />
+            <div class="pic">
+                <NuxtPicture src="/img/stock/breadboard-components.jpg" alt="Electronic components on a circuit board" sizes="sm:100vw md:768px" loading="lazy" />
             </div>
             <p>
-                In our state-of-the-art facilities, we combine traditional craftsmanship with advanced technologies. We
-                leverage the latest in automation, robotics, and digital manufacturing to produce goods of the finest
-                quality with the highest efficiency. When combined with our uncompromising eye for quality assurance and
-                control this results in reduced timelines on projects with better results than competitors.
+                We work with companies building connected products, industrial systems, and IoT platforms. The
+                common thread is that their projects cross boundaries between hardware and software, and they
+                need a team that's comfortable on both sides.
             </p>
-            <UButton to="/services" color="brand" icon="i-heroicons-wrench" size="xl">Our Services</UButton>
+            <UButton to="/services" color="primary" icon="i-heroicons-wrench-screwdriver" size="xl">What We Do</UButton>
             <p>
-                At the heart of our operations lies a relentless pursuit of innovation. We thrive on pushing boundaries,
-                exploring new frontiers, and pioneering breakthroughs that revolutionize industries. Whether it's
-                developing sustainable energy solutions, optimizing manufacturing processes, or designing
-                next-generation products, we are driven by a spirit of creativity and ingenuity.
+                We care about the details that matter in production. Firmware that passes EMC. Boards that
+                your CM can actually build. Backends that don't page you at 3am. Sites that load fast on a
+                phone in rural Australia.
             </p>
-            <div>
-                <NuxtPicture src="/img/laptop.jpg" class="pic" />
+            <div class="pic">
+                <NuxtPicture src="/img/stock/data-center.jpg" alt="Server racks in a data center" sizes="sm:100vw md:768px" loading="lazy" />
             </div>
             <p>
-                At Koios Digital, we understand that success is not just about what we create, but how we create it.
-                That's
-                why we prioritize collaboration, integrity, and customer satisfaction in everything we do. We partner
-                closely with our clients, understanding their unique needs and challenges to deliver tailored solutions
-                that exceed expectations.
+                If you've got a project that needs more than one discipline, we should talk. We work best as
+                a long-term partner, embedded in your project from early prototyping through to production
+                and beyond.
             </p>
+            <UButton to="/contact" color="primary" icon="i-heroicons-envelope" size="xl">Get in Touch</UButton>
         </UPageBody>
     </UContainer>
 </template>
 
 <script setup lang="ts">
+const title = 'About | Koios Digital'
+const description = 'A small, senior engineering team that works across firmware, IoT, PCB design, cloud, and web. One team for the whole stack, from prototype to production.'
+
 useSeoMeta({
-    title: 'About - Koios Digital',
-    description: 'Composed of creative designers and motivated entrepreneurs, our team loves creating products that solve real problems and make life better for people.',
+    title,
+    description,
+    ogTitle: title,
+    ogDescription: description,
 });
 </script>
 

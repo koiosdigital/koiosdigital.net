@@ -1,5 +1,13 @@
 <template>
-  <slot />
+  <div>
+    <SiteNavbar />
+
+    <UMain>
+      <slot/>
+    </UMain>
+
+    <SiteFooter />
+  </div>
 </template>
 
 <script setup lang="ts">

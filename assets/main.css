@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --color-brand-50: #fef9ec;
+  --color-brand-100: #fcf0c9;
+  --color-brand-200: #f8df8f;
+  --color-brand-300: #f4c955;
+  --color-brand-400: #f2b42d;
+  --color-brand-500: #e79114;
+  --color-brand-600: #d06f0f;
+  --color-brand-700: #ad4e10;
+  --color-brand-800: #8c3d14;
+  --color-brand-900: #733314;
+  --color-brand-950: #421906;
+}
+
+@theme {
+  --font-sans: "Titillium Web", system-ui, sans-serif;
+}
+
+.np-rnd {
+    img {
+        @apply rounded-lg;
+    }
+}

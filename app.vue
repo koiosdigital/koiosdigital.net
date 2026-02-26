@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const siteUrl = 'https://koiosdigital.net'
+
 useHead({
   htmlAttrs: {
     lang: 'en',
@@ -11,16 +13,19 @@ useHead({
     }
   ],
 })
+
+useSeoMeta({
+  ogSiteName: 'Koios Digital',
+  ogType: 'website',
+  ogImage: `${siteUrl}/img/logo_light.png`,
+  twitterCard: 'summary',
+})
 </script>
 
 <template>
-  <SiteNavbar />
-
-  <UMain>
+  <UApp>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-  </UMain>
-
-  <UFooter />
+  </UApp>
 </template>

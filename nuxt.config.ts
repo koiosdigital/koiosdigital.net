@@ -1,11 +1,8 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  extends: ['@nuxt/ui-pro'],
-
   modules: [
     "@nuxt/ui",
-    "@nuxtjs/tailwindcss",
     '@nuxt/image',
     '@nuxtjs/sitemap',
     "@nuxt/eslint",
@@ -13,7 +10,7 @@ export default defineNuxtConfig({
     "nuxt-svgo"
   ],
 
-  css: ['assets/main.scss'],
+  css: ['assets/main.css'],
 
   app: {
     head: {
@@ -30,7 +27,19 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: ['koiosdigital.net'],
+    ...process.env.NODE_ENV !== 'development' && {
+      provider: 'vercel',
+    },
+    format: ['avif', 'webp', 'png'],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
+    densities: [1, 2],
   },
 
   sitemap: {

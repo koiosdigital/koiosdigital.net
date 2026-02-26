@@ -44,8 +44,6 @@ export default defineEventHandler(async (event) => {
     // Don't request encoded responses to avoid encoding issues in production
     headers.set('Accept-Encoding', 'identity');
 
-    console.log(headers)
-
     try {
         // Make the proxied request
         const response = await fetch(fullUrl, {

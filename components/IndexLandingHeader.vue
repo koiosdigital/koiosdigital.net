@@ -1,13 +1,14 @@
 <template>
     <div class='md:grid-cols-2 grid-cols-1 grid'>
-        <ULandingHero title="Engineering the future"
-            description="We're designers and entrepreneurs who are passionate about creating products to solve real-world problems and make a difference in people's lives."
-            :links="[{ label: 'Get Started', icon: 'i-heroicons-rocket-launch', size: 'lg', to: '/contact' }, {
-                label: 'Learn More',
-                icon: 'i-heroicons-book-open',
+        <UPageHero title="From Silicon to Cloud"
+            description="Firmware, hardware, cloud, and web. One team that covers the whole stack so you don't have to manage five vendors to ship one product."
+            :links="[{ label: 'Start a Project', icon: 'i-heroicons-rocket-launch', size: 'lg', to: '/contact' }, {
+                label: 'Our Services',
+                icon: 'i-heroicons-wrench-screwdriver',
                 size: 'lg',
-                color: 'gray',
-                to: '/about'
+                color: 'neutral',
+                variant: 'subtle',
+                to: '/services'
             }]" orientation='vertical' />
         <div class="h-full w-full hidden md:block">
             <Traces :font-controlled="false" />
@@ -16,7 +17,6 @@
 </template>
 
 <script lang="ts" setup>
-//@ts-expect-error - Ignore this error
 import Traces from '@/assets/traces.svg';
 </script>
 

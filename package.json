@@ -13,30 +13,23 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.1.4",
-    "@nuxt/fonts": "^0.7.1",
-    "@nuxt/image": "^1.7.0",
-    "@nuxt/ui": "^2.18.3",
-    "@nuxt/ui-pro": "^1.4.0",
-    "@nuxtjs/sitemap": "6.0.0-beta.1",
-    "nuxt": "^3.12.3",
-    "nuxt-svgo": "^4.0.2",
-    "tailwindcss": "^3.4.7",
-    "vue": "^3.4.31",
-    "vue-router": "^4.4.0"
+    "@iconify-json/heroicons": "^1.2.0",
+    "@nuxt/fonts": "^0.14.0",
+    "@nuxt/image": "^2.0.0",
+    "@nuxt/ui": "^4.5.0",
+    "@nuxtjs/sitemap": "7.6.0",
+    "nuxt": "^4.3.1",
+    "nuxt-svgo": "^4.2.6",
+    "tailwindcss": "^4.2.1",
+    "vue": "^3.5.29",
+    "vue-router": "^5.0.3"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.3.13",
-    "@nuxtjs/tailwindcss": "^6.12.0",
-    "@types/eslint": "^8.56.10",
-    "eslint": "^8.57.0",
-    "sass": "^1.77.6",
-    "typescript": "^5.5.3"
+    "@nuxt/eslint": "^1.15.2",
+"@types/eslint": "^9.6.1",
+    "eslint": "^10.0.2",
+    "sass": "^1.97.3",
+    "typescript": "^5.9.3"
   },
-  "packageManager": "pnpm@9.5.0",
-  "pnpm": {
-    "patchedDependencies": {
-      "@nuxt/ui-pro@1.4.0": "patches/@nuxt__ui-pro@1.4.0.patch"
-    }
-  }
+  "packageManager": "pnpm@11.0.0-dev.1005+sha512.91f84a392eea348ea4852a182912d2520273a4336f933b78cc44bc931eb999923c097e9433a9b355adc1f725725ea99082fc9f032a559df832632e764c92c798"
 }
