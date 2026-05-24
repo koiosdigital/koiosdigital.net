@@ -28,7 +28,10 @@ export default defineNuxtConfig({
 
   image: {
     ...process.env.NODE_ENV !== 'development' && {
-      provider: 'vercel',
+      provider: 'cloudflare',
+      cloudflare: {
+        baseURL: 'https://koiosdigital.net',
+      },
     },
     format: ['avif', 'webp', 'png'],
     screens: {
